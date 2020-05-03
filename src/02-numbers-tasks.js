@@ -19,8 +19,8 @@
  *   5, 10 => 50
  *   5, 5  => 25
  */
-function getRectangleArea(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleArea(width, height) {
+  return width * height;
 }
 
 
@@ -35,8 +35,8 @@ function getRectangleArea(/* width, height */) {
  *   3.14 => 19.729201864543903
  *   0    => 0
  */
-function getCicleCircumference(/* radius */) {
-  throw new Error('Not implemented');
+function getCicleCircumference(radius) {
+  return Math.PI * (2 * radius);
 }
 
 /**
@@ -87,8 +87,8 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   x + 8 = 0       => -8
  *   5*x = 0         => 0
  */
-function getLinearEquationRoot(/* a, b */) {
-  throw new Error('Not implemented');
+function getLinearEquationRoot(a, b) {
+  return -b / a;
 }
 
 
@@ -184,8 +184,9 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  const delim = (10 ** pow);
+  return Math.round(num / delim) * delim;
 }
 
 /**
@@ -236,8 +237,14 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  const convert = Number(value);
+  if (Number.isNaN(convert)) {
+    return def;
+  } if (typeof convert === 'number') {
+    return convert;
+  }
+  return def;
 }
 
 module.exports = {
