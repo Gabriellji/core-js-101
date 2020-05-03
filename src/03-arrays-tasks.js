@@ -490,7 +490,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-  const filtered = arr.filter((x, i, a) => a.indexOf(x) === i);
+  const filtered = arr.filter((x, idx, array) => array.indexOf(x) === idx);
   return filtered;
 }
 
