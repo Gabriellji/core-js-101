@@ -20,8 +20,12 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  this.width = width;
+  this.height = height;
+  this.getArea = function getArea() {
+    return this.width * this.height;
+  };
 }
 
 
@@ -51,9 +55,21 @@ function getJSON(obj) {
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-function fromJSON(/* proto, json */) {
-  throw new Error('Not implemented');
-}
+function fromJSON(proto, json) {
+  const str = json.slice(1, -1);
+  const arr = str.split(', ');
+  const reduced = arr.reduce((acc, el) => {
+    const regExpKey = /"([a-z]+)":/;
+    const key = el.match(regExpKey)[1];
+    const regExpValue = /:(.*)$/;
+    let value = el.match(regExpValue)[1];
+    value = value[0] === "'" ? value : Number(value);
+    acc[key] = value;
+    return acc;
+  }, {});
+  Object.setPrototypeOf(reduced, proto);
+  return reduced;
+} // парсинг
 
 
 /**
