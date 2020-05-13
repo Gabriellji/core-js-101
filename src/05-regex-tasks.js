@@ -33,6 +33,7 @@
  */
 function getRegexForGuid() {
   throw new Error('Not implemented');
+  // return RegExp(/([A-Fa-d\d-])/);
 }
 
 
