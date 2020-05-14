@@ -27,8 +27,15 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 3 === 0 && num % 5 === 0) {
+    return 'FizzBuzz';
+  } if (num % 3 === 0) {
+    return 'Fizz';
+  } if (num % 5 === 0) {
+    return 'Buzz';
+  }
+  return num;
 }
 
 
@@ -84,8 +91,11 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  if ((a + b > c) && (a + c > b) && (b + c > a)) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -152,8 +162,11 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const sqrtX = (point.x - circle.center.x) ** 2;
+  const sqrtY = (point.y - circle.center.y) ** 2;
+  const distance = Math.sqrt((sqrtX) + (sqrtY));
+  return distance < circle.radius;
 }
 
 
@@ -168,8 +181,24 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const arr = [];
+  for (let i = 0; i < str.length; i += 1) {
+    if (!arr.includes(str[i])) {
+      let flag = true;
+      for (let j = i + 1; j < str.length; j += 1) {
+        if (str[i] === str[j]) {
+          flag = false;
+          arr.push(str[i]);
+          break;
+        }
+      }
+      if (flag) {
+        return str[i];
+      }
+    }
+  }
+  return null;
 }
 
 
