@@ -224,8 +224,13 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const myA = a > b ? String(b) : String(a);
+  const myB = a > b ? String(a) : String(b);
+  const start = isStartIncluded ? '[' : '(';
+  const end = isEndIncluded ? ']' : ')';
+  const result = `${start + myA}, ${myB}${end}`;
+  return result;
 }
 
 
@@ -292,8 +297,20 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const myCcn = String(ccn);
+  let sum = 0;
+  for (let i = 0; i < myCcn.length; i += 1) {
+    let cardNum = parseInt(myCcn[i], 10);
+    if ((myCcn.length - i) % 2 === 0) {
+      cardNum *= 2;
+      if (cardNum > 9) {
+        cardNum -= 9;
+      }
+    }
+    sum += cardNum;
+  }
+  return sum % 10 === 0;
 }
 
 /**
@@ -339,8 +356,26 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const stack = [];
+  const opened = ['[', '{', '<', '('];
+  const closed = [']', '}', '>', ')'];
+  for (let i = 0; i < str.length; i += 1) {
+    if (opened.includes(str[i])) {
+      stack.push(str[i]);
+    }
+    if (closed.includes(str[i])) {
+      const openIdx = opened.indexOf(stack[stack.length - 1]);
+      const closeIdx = closed.indexOf(str[i]);
+      if (stack.length === 0) {
+        return false;
+      }
+      if (openIdx === closeIdx) {
+        stack.pop();
+      }
+    }
+  }
+  return stack.length === 0;
 }
 
 
@@ -364,8 +399,14 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  let result = '';
+  let number = num;
+  while (number >= n) {
+    result = (number % n) + result;
+    number = Math.floor(number / n);
+  }
+  return number + result;
 }
 
 
